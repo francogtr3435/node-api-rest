@@ -1,37 +1,32 @@
+ import  "dotenv/config"
  import express from "express"
+ import cors from "cors"
 
  const app = express()
 
+ app.use(cors())
+ app.use(express.json())
 
- const products=[
-    {id:1 , name:"p1", price: 100},
-    {id:2 , name: "p2", price: 101 },
-    {id:3, name: " p3", price: 102},
- ]
- 
-
- app.get(`/`, (req, res)=>{
-    res.send("<h1> hola fg  </h1>")
- })
-
-app.get(`/products`,(req, res)=>{
-    res.sent(products)
+ app.get("/", (req, res) =>{
+    res.send("api rest en node.js")
 })
 
-app.get(`/products/:id`,(req, res)=>{
-    
-    const product = products.find((item) => item.id == req.params.id)
-    res.json(product)
+ import productsrouter from "./src/routes/products.router.js"
+ app.use("/api",productsrouter)
+
+
+ app.use((req,res,next) =>{
+    res.status(404).json({ erro: "no encontrado"})
 })
- const PORT =3000
 
- app.listen(PORT, ()=>console.log(`http://localhost:${PORT}`))
+const PORT = process.env.PORT || 3001
+
+app.listen(PORT, ()=>console.log(`http://localhost:${PORT}`))
 
 
 
-//para ver cambios (desarollo)
-//npm install --save-dev nodemon
-// "dev": "nodemon index.js"
+
+
 
 
 
