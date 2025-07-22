@@ -17,19 +17,20 @@ import { crearProduct,
          deleteProduct }
         from "../controllers/products.controllers.js";
 
+import {auth} from "../middlewares/auth.middleware.js"
+        
 router.get("/products", getAllProducts)
 router.get("/products/search", searchProduct)
 router.get("/products/:id", getProductById)
-router.post("/products", crearProduct)
+router.post("/products", auth,  crearProduct)
 router.delete("/products/:id" , deleteProduct)
-
 
 //modificar producto pisandolo(objeto completo)
 router.put(`/products/:id` ,(req, res) => {
     const productId = parseInt(req.params.id, 10)
     const produCtIndex = products.findIndex((p) =>p.id == productId) 
     
-    if(produCtIndex == -1){
+    if(produCtIndex === -1){
      return res.status(404).json({ error: "producto no encontrado"})   
     }
 
@@ -38,7 +39,6 @@ router.put(`/products/:id` ,(req, res) => {
     products[produCtIndex] = {id: productId, nombre, precio, cantidad}
     res.json(products[produCtIndex])
 })
-
 
 export default router
 

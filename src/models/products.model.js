@@ -4,49 +4,66 @@ import path from "path"
 const __dirname = import.meta.dirname
 
 const jsonPath = path.join(__dirname, "/products.json")
-
 const json = fs.readFileSync(jsonPath , "utf-8")
-
 const products = JSON.parse(json)
 
 //console.log(products)
 
-export const getAllProducts = () => {
-    return products
-}
+import {db} from "./data.js"
+import { collection , doc, getDocs, getDoc, addDoc, deleteDoc} from "firebase/firestore"
 
-export const getProductsById = (id) =>{
-    return products.find((item) => item.id == id)
-}
+const productsCollection = collection(db, "products")
 
-export const crearProduct = (data) => {
-   // console.log({...data})
-
-    const newProduct = {
-        id: products.length +1,
-        ...data,
+export const getAllProducts = async() => {
+    try{
+        const snapshot = await getDocs(productsCollection)
+        return snapshot.docs.map((doc) =>({id: doc.id, ...doc.data()}))
+    }catch(error)
+    {
+        console.error(error)
     }
-
-    products.push(newProduct)
-
-    fs.writeFileSync(jsonPath, JSON.stringify(products))
-
-    return newProduct
 }
-//ejemplo cambio un poco con la base de datos
-export const deleteProduct = (id) => {
 
-    const productIndex = products.findIndex((p)=> p.id == productId)
- 
-    if(productIndex == -1){
-        return null
+export const  getProductById = async (id)=>{
+    try{
+        const productRef = doc(productsCollection, id)
+        const snapshot = await getDoc(productRef)
+        return snapshot.exists() ? { id: snapshot.id, ...snapshot.data()} : null
+    }
+    catch(error)
+    {
+      console.error(error)
+    }
+} 
+
+//export const getProductsById = (id) =>{
+//    return products.find((item) => item.id == id)
+//}
+
+export const crearProduct = async (data) => {
+    try{
+    const docRef = await addDoc(productsCollection, data)
+    return {id: docRef.id, ...data}
+    }catch(error){
+    console.error(error)
+ }    
+}
+
+//ejemplo cambio un poco con la base de datos
+export const deleteProduct = async (id) => {
+    try{
+    const productRef = doc(productsCollection, id)
+    const snapshot = await getDoc(productRef) 
+
+    if(!snapshot.exists()){
+        return false
     } 
-    else{
-    const product= products.splice(productIndex, 1)
-    
-    fs.writeFileSync(jsonPath, json.stringify(products))
-    
-    return product
+
+    await deleteDoc(productRef)
+    return true
+    }
+     catch (error){
+     console.error(error)
     }
 }
 
