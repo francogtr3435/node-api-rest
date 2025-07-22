@@ -7,13 +7,10 @@
  app.use(express.json())
 
  app.get("/", (req, res) =>{
-    res.send("api rest en node.js")
+    res.json({message: "API REST EN NODE.JS"})
 })
 
-//import {auth} from "./src/middlewares/auth.middleware.js"
-
 import productsRouter from "./src/routes/products.router.js"
- 
 app.use("/api", productsRouter)
 
 import authRouter from "./src/routes/auth.router.js"
@@ -24,9 +21,8 @@ app.use(authRouter)
     res.status(404).json({ erro: "no encontrado"})
 })
 
-
-
 const PORT = process.env.PORT || 3001
+
 app.listen(PORT, ()=>console.log(`http://localhost:${PORT}`))
 
 
