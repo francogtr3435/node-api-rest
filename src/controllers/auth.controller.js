@@ -21,5 +21,5 @@ export const login = (req, res) =>{
     }else{
         return res.sendStatus(401)
     }
-    res.json({messge:"ok"})
+    res.json({message:"ok"})
 } 

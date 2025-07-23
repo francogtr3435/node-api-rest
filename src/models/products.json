@@ -1,42 +1,32 @@
 [
-    {
-    "id": 1 , 
-    "nombre":"subaru", 
-    "precio": 10, 
-    "cantidad": 10,
-    "catergoria": ["vehiculo", "generalista"]
-    },  
-  
-    {
-    "id": 2 , 
-    "nombre":"bmw", 
-    "precio": 20, 
-    "cantidad": 20,
-    "catergoria": ["vehiculo", "premiun"]
-    },  
-     
-    {
-    "id": 3 , 
-    "nombre":"mazda", 
-    "precio": 30, 
-    "cantidad": 30, 
-    "catergoria": ["vehiculo", "generalista"]
-    },
-
-    {
-    "id": 4 , 
-    "nombre":"audi", 
-    "precio": 40, 
-    "cantidad": 40,
-    "catergoria": ["vehiculo", "premiun"] 
-    },
-
-    {
-    "id": 5 , 
-    "nombre":"toyota", 
-    "precio": 50, 
-    "cantidad": 50,
-    "catergoria": ["vehiculo", "generalista"] 
-    }
-    
+  {
+    "id": 1,
+    "name": "Remera",
+    "price": 1500,
+    "categories": ["indumentaria", "urbano"]
+  },
+  {
+    "id": 2,
+    "name": "Zapatillas de Running",
+    "price": 12000,
+    "categories": ["calzado", "deportes"]
+  },
+  {
+    "id": 3,
+    "name": "Mochila de Marvel",
+    "price": 3500,
+    "categories": ["mochilas", "escolar"]
+  },
+  {
+    "id": 4,
+    "name": "Smartwatches",
+    "price": 8000,
+    "categories": ["tecnología", "accesorios"]
+  },
+  {
+    "id": 5,
+    "name": "campera",
+    "price": 5000,
+    "categories": ["indumentaria", "invierno"]
+  }
 ]
