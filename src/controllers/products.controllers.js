@@ -9,7 +9,7 @@ export const searchProducts = async (req, res) => {
   const { name } = req.query;
 
   if (!name) {
-    return res.status(400).json({ error: 'El nombre es requerido' });
+    return res.status(400).json({ error: 'Nombre requerido' });
   }
 
   const products = await Service.getAllProducts();
@@ -19,7 +19,7 @@ export const searchProducts = async (req, res) => {
   );
 
   if (productsFiltered.length === 0) {
-    return res.status(404).json({ error: "No se encontraron productos" });
+    return res.status(404).json({ error: "Productos no encontrado" });
   }
 
   res.json(productsFiltered);
@@ -31,7 +31,7 @@ export const getProductById = async (req, res) => {
   if (product) {
     res.json(product);
   } else {
-    res.status(404).json({ error: "No existe el producto" });
+    res.status(404).json({ error: "Producto inexistente" });
   }
 };
 
@@ -51,7 +51,7 @@ export const createProduct = async (req, res) => {
     }
 
     if (typeof req.body.price !== 'number' || req.body.price < 0) {
-      return res.status(400).json({ message: 'Precio inválido' });
+      return res.status(400).json({ message: 'Invalido' });
     }
 
     if (!Array.isArray(req.body.categories)) {
@@ -77,7 +77,7 @@ export const deleteProduct = async (req, res) => {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
 
-    res.status(200).json({ message: `Producto con ID ${id} eliminado correctamente` });
+    res.status(200).json({ message: `Producto con ID ${id} eliminado` });
 
   } catch (error) {
     console.log(error);
@@ -97,7 +97,7 @@ export const updateProduct = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "Producto actualizado correctamente",
+      message: "Producto actualizado",
       ...updated
     });
 
