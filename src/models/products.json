@@ -9,24 +9,24 @@
     "id": 2,
     "name": "Zapatillas de Running",
     "price": 12000,
-    "categories": ["calzado", "deportes"]
+    "categories": [ "calzado" , "deportes" ]
   },
   {
     "id": 3,
     "name": "Mochila de Marvel",
     "price": 3500,
-    "categories": ["mochilas", "escolar"]
+    "categories": [ "mochilas" , "escolar" ]
   },
   {
     "id": 4,
     "name": "Smartwatches",
     "price": 8000,
-    "categories": ["tecnología", "accesorios"]
+    "categories": [ "tecnología" , "accesorios" ]
   },
   {
     "id": 5,
     "name": "campera",
     "price": 5000,
-    "categories": ["indumentaria", "invierno"]
+    "categories": [ "indumentaria" , "invierno" ] 
   }
 ]
